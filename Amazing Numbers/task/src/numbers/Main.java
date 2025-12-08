@@ -1,67 +1,29 @@
 package numbers;
+import java.util.ArrayList;
+
 import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 //        write your code here
         Scanner sc = new Scanner(System.in);
-        long n= 10L;
+        String intro = """
+                Welcome to Amazing Numbers!
+                
+                Supported requests:
+                - enter a natural number to know its properties;
+                - enter two natural numbers to obtain the properties of the list:
+                  * the first parameter represents a starting number;
+                  * the second parameter shows how many consecutive numbers are to be processed;
+                - separate the parameters with one space;
+                - enter 0 to exit.
+                """;
+        System.out.println(intro);
+        /*System.out.print("Enter a request: ");
+        long n = sc.nextLong();*/
+        anthony(sc);
 
-        System.out.println("Welcome to Amazing Numbers!");
-        System.out.println();
-        System.out.println("Supported requests:");
-        System.out.println("- enter a natural number to know its properties;");
-        System.out.println("- enter 0 to exit.");
-        System.out.println();
-      do{
-          boolean isEven= false;
-          boolean isOdd= false;
-          boolean isBuzz = false;
-          boolean isDuck = false;
-          boolean isPalindrome = false;
-          System.out.print("Enter a request: ");
-          n = sc.nextLong();
-          System.out.println();
-          if (n>=1 ){
-              System.out.printf("Properties of %d",n);
-              System.out.println();
-              if(n%2==0){
-
-                  System.out.println();
-                  isEven=true;
-                  System.out.printf("        even: %b",isEven);
-                  System.out.println();
-                  System.out.printf("        odd: %b",isOdd);
-                  System.out.println();
-              }else{
-                  isOdd=true;
-                  System.out.printf("        even: %b",isEven);
-                  System.out.println();
-                  System.out.printf("         odd: %b",isOdd);
-                  System.out.println();
-              }
-              if((n%7==0)||(n%10==7)){
-                  isBuzz =true;
-              }
-              System.out.printf("        buzz: %b",isBuzz);
-              System.out.println();
-              isDuck = containsZero(n);
-              System.out.printf("        duck: %b", isDuck);
-              System.out.println();
-              String newValue = reverseString(n);
-              isPalindrome = isPalindromic(n, newValue);
-              System.out.printf(" palindromic: %b", isPalindrome);
-              System.out.println();
-              System.out.println();
-
-          } else if (n==0) {
-              System.out.println("Goodbye!");
-              break;
-          } else{
-              System.out.println("The first parameter should be a natural number or zero.");
-          }
-
-      }while (n!=0);
     }
+
     public static boolean containsZero(long n){
         boolean isDuck = false;
         String value = String.valueOf(n);
@@ -89,6 +51,74 @@ public class Main {
         }
        return isTrue;
     }
+    public static void anthony(Scanner sc){
+        long n =0;
+            boolean isEven= false;
+            boolean isGapful = false;
+            boolean isOdd= false;
+            boolean isBuzz = false;
+            boolean isDuck = false;
+            boolean isPalindrome = false;
+            System.out.print("Enter a request: ");
+            n = sc.nextLong();
+        System.out.println();
+        if (n>=1 ){
+            System.out.printf("Properties of %d",n);
+            if(n%2==0){
 
+                System.out.println();
+                isEven=true;
+                System.out.printf("        even: %b",isEven);
+                System.out.println();
+                System.out.printf("        odd: %b",isOdd);
+                System.out.println();
+            }else{
+                isOdd=true;
+                System.out.printf("        even: %b",isEven);
+                System.out.println();
+                System.out.printf("         odd: %b",isOdd);
+                System.out.println();
+            }
+            if((n%7==0)||(n%10==7)){
+                isBuzz =true;
+            }
+            System.out.printf("        buzz: %b",isBuzz);
+            System.out.println();
+            isDuck = containsZero(n);
+            System.out.printf("        duck: %b", isDuck);
+            System.out.println();
+            String newValue = reverseString(n);
+            isPalindrome = isPalindromic(n, newValue);
+            System.out.printf(" palindromic: %b", isPalindrome);
+            System.out.println();
+            isGapful = isGrapeful(n);
+            System.out.printf(" gapful: %b", isGapful);
+            System.out.println();
+
+        } else if (n==0) {
+            System.out.println("Goodbye!");
+
+        } else {
+            System.out.println("The first parameter should be a natural number or zero.");
+        }
+    }
+
+    public static boolean isGrapeful(long n){
+        boolean isTrue = false;
+        String value = String.valueOf(n);
+        String [] arrValue = value.split("");
+        int x = arrValue.length;
+        int [] arr = new int[x];
+        for (int i = 0; i < x; i++) {
+            arr[i] = value.charAt(i) - '0';
+        }
+        int a = arr[0];
+        int b = arr[arr.length-1];
+        int result = Integer.parseInt("" + a + b);
+        if (x>=3&& n%result==0){
+            isTrue = true;
+        }
+        return isTrue;
+    }
 
 }
