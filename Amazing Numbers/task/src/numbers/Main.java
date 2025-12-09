@@ -2,6 +2,7 @@ package numbers;
 import java.util.ArrayList;
 
 import java.util.Scanner;
+@SuppressWarnings("Unused")
 public class Main {
     public static void main(String[] args) {
 //        write your code here
@@ -18,10 +19,43 @@ public class Main {
                 - enter 0 to exit.
                 """;
         System.out.println(intro);
-        /*System.out.print("Enter a request: ");
-        long n = sc.nextLong();*/
-        anthony(sc);
+        System.out.print("Enter a request: ");
+        System.out.println();
+        String name =  sc.nextLine();
+        String[] arr = name.split(" ");
 
+        long n = Long.parseLong(arr[0]);
+        if(n!=0&&n==Math.floor(n)){
+            do{
+                int m = arr.length;
+                if (m==1){
+                    anthony(n);
+                }else if (m>1){
+
+                }
+                System.out.print("Enter a request: ");
+                System.out.println();
+                name =  sc.nextLine();
+                arr = name.split(" ");
+
+                n = Long.parseLong(arr[0]);
+                int a = Integer.parseInt(arr[1]);
+                if (a!=Math.floor(a)){
+                    System.out.println("The second parameter should be a natural number.");
+                    break;
+                }
+                if (n==0) {
+                    System.out.println("Goodbye!");
+                    break;
+                }
+
+            }while (n!=0);
+        }else if(n==0){
+            System.out.println("Goodbye!");
+        }else {
+            System.out.println("The first parameter should be a natural number or zero.");
+        }
+        //anthony(sc);
     }
 
     public static boolean containsZero(long n){
@@ -51,19 +85,17 @@ public class Main {
         }
        return isTrue;
     }
-    public static void anthony(Scanner sc){
-        long n =0;
+    public static void anthony(long n){
+            //long n =0;
             boolean isEven= false;
             boolean isGapful = false;
             boolean isOdd= false;
             boolean isBuzz = false;
             boolean isDuck = false;
             boolean isPalindrome = false;
-            System.out.print("Enter a request: ");
-            n = sc.nextLong();
-        System.out.println();
         if (n>=1 ){
             System.out.printf("Properties of %d",n);
+            System.out.println();
             if(n%2==0){
 
                 System.out.println();
@@ -92,14 +124,9 @@ public class Main {
             System.out.printf(" palindromic: %b", isPalindrome);
             System.out.println();
             isGapful = isGrapeful(n);
-            System.out.printf(" gapful: %b", isGapful);
+            System.out.printf("      gapful: %b", isGapful);
             System.out.println();
 
-        } else if (n==0) {
-            System.out.println("Goodbye!");
-
-        } else {
-            System.out.println("The first parameter should be a natural number or zero.");
         }
     }
 
